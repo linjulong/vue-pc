@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import debounce from '@/components/Debounce'
+import Table from './Table'
 
-Vue.component('debounce', debounce)
+Vue.component('c-table', Table)

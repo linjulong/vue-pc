@@ -8,7 +8,6 @@ function resolve(dir) {
 
 const name = defaultSettings.title || 'vue Admin Template' // page title
 
-
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
@@ -36,8 +35,20 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
+    },
+    proxy: { // 匹配规则
+      '/api': {
+        // 要访问的跨域的域名
+        target: 'https://kekonglong.com/admin-api/',
+        ws: true,
+        secure: false, // 使用的是http协议则设置为false，https协议则设置为true
+        changOrigin: true, // 开启代理
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
     }
-    //before: require('./mock/mock-server.js')
+    // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

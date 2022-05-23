@@ -10,7 +10,7 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
 
@@ -26,7 +26,7 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      //const hasGetUserInfo = store.getters.name
+      // const hasGetUserInfo = store.getters.name
       // determine whether the user has obtained his permission roles through getInfo
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
@@ -49,7 +49,7 @@ router.beforeEach(async (to, from, next) => {
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
+          // Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }

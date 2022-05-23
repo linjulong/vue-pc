@@ -16,10 +16,16 @@
     <h3>第三方input</h3>
     {{text2}}
 
-    <debounce events="input" :wait="250">
-      <!-- <input @input="inputChange" placeholder="输入关键字进行搜索" /> -->
-      <el-input v-model="text2" @input="inputChange" />
-      <!-- <my-el-input suffix-icon="el-icon-date" v-model="text2" @input="inputChange" @input.native="inputChange" /> -->
+    <!-- <debounce time='1000' :Switch='true'>
+      <el-button @click="inputChange">button</el-button>
+    </debounce>
+
+    <debounce time='1000' :Switch='true'>
+      <input @input="inputChange">input</input>
+    </debounce> -->
+
+    <debounce time='1000' :Switch='true'>
+      <el-input @input="inputChange" v-model="text2"></el-input>
     </debounce>
   </div>
 </template>
