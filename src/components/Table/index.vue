@@ -5,11 +5,12 @@
       v-bind="$attrs"
       :data="tableData"
       style="width: 100%"
+      :max-height="maxHeight"
       v-on="$listeners"
     >
       <slot />
     </el-table>
-    <el-pagination class="pagination" :current-page.sync="queryOptions.current" :page-size.sync="queryOptions.size" layout="total, sizes, prev, pager, next, jumper" :total="total" @size-change="loadData" @current-change="loadData" />
+    <el-pagination v-if="showPage" class="pagination" :current-page.sync="queryOptions.current" :page-size.sync="queryOptions.size" layout="total, sizes, prev, pager, next, jumper" :total="total" @size-change="loadData" @current-change="loadData" />
   </div>
 
 </template>
@@ -27,6 +28,18 @@ export default {
     query: {
       type: Function,
       required: true
+    },
+    autoLoad: {
+      type: Boolean,
+      default: true
+    },
+    showPage: {
+      type: Boolean,
+      default: true
+    },
+    maxHeight: {
+      type: [String, Number],
+      default: '700'
     }
   },
   data() {
@@ -38,7 +51,9 @@ export default {
     }
   },
   created() {
-    this.loadData()
+    if (this.autoLoad) {
+      this.loadData()
+    }
   },
   methods: {
     async loadData() {
@@ -49,7 +64,9 @@ export default {
       this.loading = false
     },
     reload() {
-      this.queryOptions = initQueryOptions()
+      // 只重置current
+      this.queryOptions.current = 1
+      // this.queryOptions = initQueryOptions()
       this.loadData()
     }
   }
